@@ -11,8 +11,8 @@ urlpatterns = [
     path("<int:pk>/", views.WatchListDetailAV.as_view(), name="watchlist-detail"),
     
     # path("", include(router.urls)),
-    # path("stream", views.StreamPlatformAV.as_view(), name="streamplatform"),
-    # path("stream/<int:pk>", views.StreamPlatformDetailAV.as_view(), name="streamplatform-detail"),
+    path("stream/", views.StreamPlatformAV.as_view(), name="streamplatform"),
+    path("stream/<int:pk>", views.StreamPlatformDetailAV.as_view(), name="streamplatform-detail"),
     
     # path("review/", views.ReviewList.as_view(), name="review-list"),
     # path("review/<int:pk>/", views.ReviewDetail.as_view(), name="review-detail"),
