@@ -5,12 +5,16 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 from watchlist_app.api.permissions import (IsAdminOrReadOnly,
                                            IsReviewUserOrReadOnly)
 from watchlist_app.api.serializers import (ReviewSerializer,
                                            StreamPlatformSerializer,
                                            WatchListSerializer)
+from watchlist_app.api.throttling import (ReviewCreateThrottle,
+                                          ReviewListThrottle,
+                                          WatchListThrottle)
 from watchlist_app.models import Review, StreamPlatform, WatchList
 
 
@@ -73,6 +77,7 @@ class StreamPlatformDetailAV(APIView):
 class WatchListAV(APIView):
 
     permission_classes = [IsAdminOrReadOnly]
+    throttle_classes = [WatchListThrottle]
 
     def get(self, request):
         watch_list = WatchList.objects.all()
@@ -129,6 +134,7 @@ class WatchListDetailAV(APIView):
 class ReviewList(generics.ListAPIView):
     # queryset=Review.objects.all()
     serializer_class = ReviewSerializer
+    throttle_classes = [ReviewListThrottle, AnonRateThrottle]
 
     def get_queryset(self):
         pk = self.kwargs["pk"]
@@ -139,9 +145,13 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsReviewUserOrReadOnly]
+    throttle_classes = [ReviewListThrottle, UserRateThrottle]
+
+
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ReviewCreateThrottle]
 
     def get_queryset(self):
         return Review.objects.all()
@@ -163,6 +173,7 @@ class ReviewCreate(generics.CreateAPIView):
         watchlist.number_of_ratings = watchlist.number_of_ratings + 1
         watchlist.save()
         serializer.save(watchlist=watchlist, review_user=review_user)
+
 
 # class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
 #     queryset = Review.objects.all()

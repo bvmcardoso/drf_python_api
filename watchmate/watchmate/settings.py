@@ -138,5 +138,19 @@ REST_FRAMEWORK = {
 #     ]
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+
+
+    # 'DEFAULT_THROTTLE_CLASSES':[
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '4/day',
+        'user': '10/day',
+        'review-create': '1/day',
+        'review-list': '10/day',
+        'watch-list': '13/day'
+    }
+
 }
