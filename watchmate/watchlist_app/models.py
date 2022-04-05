@@ -22,7 +22,7 @@ class WatchList(models.Model):
     number_of_ratings = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return str(self.id) + " - " + self.title 
 
 
 class Review(models.Model):

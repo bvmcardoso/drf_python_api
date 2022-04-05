@@ -8,6 +8,9 @@ from rest_framework.permissions import (IsAuthenticated,
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
+from watchlist_app.api.pagination import (WatchListCPagination,
+                                          WatchListLOPagination,
+                                          WatchListPagination)
 from watchlist_app.api.permissions import (IsAdminOrReadOnly,
                                            IsReviewUserOrReadOnly)
 from watchlist_app.api.serializers import (ReviewSerializer,
@@ -196,9 +199,11 @@ class ReviewCreate(generics.CreateAPIView):
 class WatchListSearch(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields= ['avg_rating']
-    
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields= ['platform']
+    pagination_class = WatchListCPagination
+    ordering = 'created'
+    cursor_query_param = 'record'
 
 
 # class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
