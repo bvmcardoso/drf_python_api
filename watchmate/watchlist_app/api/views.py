@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import (IsAuthenticated,
@@ -17,6 +18,20 @@ from watchlist_app.api.throttling import (ReviewCreateThrottle,
                                           WatchListThrottle)
 from watchlist_app.models import Review, StreamPlatform, WatchList
 
+
+class UserReview(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        queryset = Review.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(review_user__username=username)
+        return queryset
+
+    # def get_queryset(self):
+    #     username = self.kwargs['username']
+    #     return Review.objects.filter(review_user__username=username)
 
 class StreamPlatformVS(viewsets.ModelViewSet):
     queryset = StreamPlatform.objects.all()
@@ -135,6 +150,9 @@ class ReviewList(generics.ListAPIView):
     # queryset=Review.objects.all()
     serializer_class = ReviewSerializer
     throttle_classes = [ReviewListThrottle, AnonRateThrottle]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['review_user__username', 'active']
+
 
     def get_queryset(self):
         pk = self.kwargs["pk"]
@@ -173,6 +191,13 @@ class ReviewCreate(generics.CreateAPIView):
         watchlist.number_of_ratings = watchlist.number_of_ratings + 1
         watchlist.save()
         serializer.save(watchlist=watchlist, review_user=review_user)
+
+
+class WatchListSearch(generics.ListAPIView):
+    queryset = WatchList.objects.all()
+    serializer_class = WatchListSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'platform__name']
 
 
 # class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
