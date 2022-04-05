@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, mixins, status, viewsets
+from rest_framework import filters, generics, mixins, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
@@ -196,8 +196,9 @@ class ReviewCreate(generics.CreateAPIView):
 class WatchListSearch(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title', 'platform__name']
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields= ['avg_rating']
+    
 
 
 # class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
