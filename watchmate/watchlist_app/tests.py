@@ -18,6 +18,7 @@ class StreamPlatformTestCase(APITestCase):
         self.stream = models.StreamPlatform.objects.create(name="Netflix", 
                                 about="#1 Platform", website="https://www.netflix.com")
 
+
     def test_streamplatform_create(self):
         data = {
             "name": "Netflix",
@@ -27,10 +28,26 @@ class StreamPlatformTestCase(APITestCase):
         response = self.client.post(reverse('stream-list'), data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+
     def test_streamplatform_list(self):
         response = self.client.get(reverse('stream-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_streamplatform_ind(self):
+
+    def test_streamplatform_get_should_succeed(self):
         response = self.client.get(reverse('stream-detail', args=(self.stream.id,)))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    
+    def test_streamplatform_put_not_admin_should_fail(self):
+        data =  {
+                    "name": "Netflox",
+                    "about": "#1 Platform",
+                    "website": "https://www.netflix.com"
+                }
+        response = self.client.put(reverse('stream-detail', args=(self.stream.id,)), data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_platform_delete_not_admin_should_fail(self):
+        response = self.client.delete(reverse('stream-detail', args=(self.stream.id,)))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
