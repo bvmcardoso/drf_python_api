@@ -23,9 +23,9 @@ def registration_view(request):
             token = Token.objects.get(user=account).key
             data['token'] = token
         else:
-            data = serializer.errors
+            data = serializer.errors 
 
-        return Response(data)
+        return Response(data, status = status.HTTP_201_CREATED)
         
         
 @api_view(['POST',])

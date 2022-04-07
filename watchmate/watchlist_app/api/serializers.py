@@ -20,7 +20,7 @@ class WatchListSerializer(serializers.ModelSerializer):
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
     # watchlist = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name="streamplatform-detail")
-    watchlist = WatchListSerializer(many=True, read_only=True)
+    # watchlist = WatchListSerializer(many=True, read_only=True)
 
     class Meta:
         model = StreamPlatform

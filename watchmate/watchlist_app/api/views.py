@@ -32,9 +32,6 @@ class UserReview(generics.ListAPIView):
             queryset = queryset.filter(review_user__username=username)
         return queryset
 
-    # def get_queryset(self):
-    #     username = self.kwargs['username']
-    #     return Review.objects.filter(review_user__username=username)
 
 class StreamPlatformVS(viewsets.ModelViewSet):
     queryset = StreamPlatform.objects.all()

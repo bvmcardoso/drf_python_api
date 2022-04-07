@@ -154,7 +154,7 @@ REST_FRAMEWORK = {
         'watch-list': '13/day'
     },
     
-    'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',)
+    # 'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',)
 
 
     #Pagination:
