@@ -1,69 +1,111 @@
-# drf_python_api (IMDB Clone)
+# 🎬 IMDB REST API – TV Series & Movies
 
-# This project is a REST API for some important features of IMDB website (TV Series and Movies)
+A Django REST Framework project providing a REST API for essential features of the IMDB website, covering TV series and movies.  
+It includes endpoints for CRUD operations, authentication, permissions, filtering, pagination, and more.
 
-## How to run the project? 
-1 - git clone git@github.com:bvmcardoso/drf_python_api.git <br/>
-2 - cd drf_python_api <br/>
-3 - pipenv shell <br/>
-4 - pipenv install <br/>
-5 - cd watchmate <br/>
-6 - python manage.py migrate <br/>
-7 - python manage.py runserver <br/>
+---
 
+## 🚀 Getting Started
 
-## How to test the project?
-1 - pipenv shell <br/>
-2 - cd watchmate <br/>
-3 - python manage.py test <br/>
+### Clone the repository
+```bash
+git clone git@github.com:bvmcardoso/drf_python_api.git
+cd drf_python_api
+```
 
+### Setup the environment
+```bash
+pipenv shell
+pipenv install
+```
 
-## Topics inside the project
+### Run migrations
+```bash
+cd watchmate
+python manage.py migrate
+```
 
-1. API Basics <br>
+### Start the development server
+```bash
+python manage.py runserver
+```
 
-2. Serializers <br>
-- Serializers <br>
-- ModelSerializer <br>
-- HyperlinkedModelSerializer <br>
+---
 
-3. Function-Based <br>
+## 🧪 Running Tests
+```bash
+pipenv shell
+cd watchmate
+python manage.py test
+```
 
-4. Class-Based Views <br>
-- APIView <br>
-- Generic Views <br>
-- Mixins <br>
-- Concrete View Classes <br>
+---
 
-5. Viewsets and Routers <br>
+## 📚 Features & Topics Covered
 
-6. Permissions <br>
-- IsAuthenticated <br>
-- IsAdminUser <br>
-- IsAuthenticatedOrReadOnly <br>
-- Custom Permission <br>
+### API Fundamentals
+- Django REST Framework basics
+- Serializer types:
+  - `Serializer`
+  - `ModelSerializer`
+  - `HyperlinkedModelSerializer`
 
-7. Authentications <br>
-- BasicAuthentication <br>
-- TokenAuthentication <br>
-- JSON Web Token Authentication <br>
+### Views
+- Function-Based Views
+- Class-Based Views:
+  - `APIView`
+  - Generic Views
+  - Mixins
+  - Concrete View Classes
+- ViewSets & Routers
 
-8. Throttling <br>
-- AnonRateThrottle <br>
-- UserRateThrottle <br>
-- ScopedRateThrottle <br>
-- Custom Throttles <br>
+### Authentication & Permissions
+- Permissions:
+  - `IsAuthenticated`
+  - `IsAdminUser`
+  - `IsAuthenticatedOrReadOnly`
+  - Custom permissions
+- Authentication methods:
+  - Basic Authentication
+  - Token Authentication
+  - JSON Web Token (JWT) Authentication
 
-9. Django Filter Backend <br>
-- Filtering <br>
-- Searching <br>
-- Ordering <br>
+### Request Throttling
+- `AnonRateThrottle`
+- `UserRateThrottle`
+- `ScopedRateThrottle`
+- Custom throttles
 
-10. Pagination <br>
-- Page Number <br>
-- Limit Offset <br>
-- Cursor <br>
- 
-11. Automated API Testing <br>
+### Filtering & Pagination
+- Django Filter Backend:
+  - Filtering
+  - Searching
+  - Ordering
+- Pagination styles:
+  - Page Number
+  - Limit Offset
+  - Cursor
 
-Any doubts, please ping me. <br/> 
+### Automated API Testing
+- Unit tests for endpoints
+- Permission and authentication test coverage
+
+---
+
+## 📂 Project Structure
+```
+drf_python_api/
+├── watchmate/
+│   ├── api/
+│   ├── watchmate/
+│   ├── manage.py
+│   └── ...
+├── Pipfile
+├── Pipfile.lock
+└── README.md
+```
+
+---
+
+## 💬 Support
+If you have any questions or suggestions, feel free to reach out.
