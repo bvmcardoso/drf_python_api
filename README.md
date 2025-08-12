@@ -95,14 +95,17 @@ python manage.py test
 ## 📂 Project Structure
 ```
 drf_python_api/
+watchmate/
+├── .vscode/
+├── user_app/
+├── watchlist_app/
 ├── watchmate/
-│   ├── api/
-│   ├── watchmate/
-│   ├── manage.py
-│   └── ...
-├── Pipfile
-├── Pipfile.lock
-└── README.md
+├── manage.py
+.gitignore
+LICENSE
+Pipfile
+Pipfile.lock
+README.md
 ```
 
 ---
