@@ -1,22 +1,51 @@
-# 🎬 IMDB REST API – TV Series & Movies
+# IMDB API — Django REST Framework
 
-A Django REST Framework project providing a REST API for essential features of the IMDB website, covering TV series and movies.  
-It includes endpoints for CRUD operations, authentication, permissions, filtering, pagination, and more.
+Production-ready REST API for movies and TV shows built with **Django REST Framework**.  
+Includes authentication, permissions, filtering, pagination, throttling, and automated tests.
 
 ---
 
-## 🚀 Getting Started
+## Features
+- JWT authentication with refresh tokens
+- Role-based permissions (admin, authenticated, read-only)
+- CRUD for movies, series, genres, and reviews
+- Filtering, search, ordering
+- Multiple pagination styles (page number, limit/offset, cursor)
+- Request throttling
+- Automated tests for endpoints, permissions, and authentication
+- Dockerized local setup and GitHub Actions CI
+
+---
+
+## Tech Stack
+- Python 3.11
+- Django 5 + Django REST Framework
+- PostgreSQL
+- Pytest
+
+---
+
+## Getting Started
 
 ### Clone the repository
 ```bash
-git clone git@github.com:bvmcardoso/drf_python_api.git
-cd drf_python_api
+git clone git@github.com:bvmcardoso/imdb-api-drf.git
+cd imdb-api-drf
 ```
 
 ### Setup the environment
+
+Using **pipenv**:
 ```bash
 pipenv shell
 pipenv install
+```
+
+Using **venv + pip**:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ### Run migrations
@@ -30,9 +59,23 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+API (Browsable):  
+```
+http://127.0.0.1:8000/
+```
+
+Admin:  
+```
+http://127.0.0.1:8000/admin/
+```
+
+(Optional) Create a superuser:
+```bash
+python manage.py createsuperuser
+```
 ---
 
-## 🧪 Running Tests
+## Running Tests
 ```bash
 pipenv shell
 cd watchmate
@@ -41,7 +84,25 @@ python manage.py test
 
 ---
 
-## 📚 Features & Topics Covered
+## 📂 Project Structure
+```
+imdb-api-drf/
+watchmate/
+├── .vscode/
+├── user_app/
+├── watchlist_app/
+├── watchmate/
+├── manage.py
+.gitignore
+LICENSE
+Pipfile
+Pipfile.lock
+README.md
+```
+
+---
+
+## Appendix — Detailed Capabilities
 
 ### API Fundamentals
 - Django REST Framework basics
@@ -92,23 +153,5 @@ python manage.py test
 
 ---
 
-## 📂 Project Structure
-```
-drf_python_api/
-watchmate/
-├── .vscode/
-├── user_app/
-├── watchlist_app/
-├── watchmate/
-├── manage.py
-.gitignore
-LICENSE
-Pipfile
-Pipfile.lock
-README.md
-```
-
----
-
-## 💬 Support
+## Support
 If you have any questions or suggestions, feel free to reach out.
