@@ -13,7 +13,7 @@ Includes authentication, permissions, filtering, pagination, throttling, and aut
 - Multiple pagination styles (page number, limit/offset, cursor)
 - Request throttling
 - Automated tests for endpoints, permissions, and authentication
-- Dockerized local setup and GitHub Actions CI
+
 
 ---
 
